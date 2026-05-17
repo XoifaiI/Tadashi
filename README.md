@@ -42,6 +42,7 @@ the standard `tcId / comment / flags / result` plus a Tadashi-specific
 | Poly1305 | done (15 tests) |
 | ChaCha20-Poly1305 | done (15 tests) |
 | XChaCha20-Poly1305 | done (17 tests) |
+| AES-GCM | done (33 tests) |
 
 ## License
 
