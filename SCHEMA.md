@@ -70,9 +70,13 @@ group share these.
   - `version`: Source version if applicable.
   - `crossChecked`: Other implementations that produced the same output.
 - Input/output fields are algorithm-specific (see per-algorithm comments).
-- `result`: `"valid"` or `"invalid"`. Tadashi avoids `"acceptable"`, if the
-  spec is ambiguous, we either fork the test into two definite vectors or
-  document the ambiguity in `comment`.
+- `result`: `"valid"`, `"invalid"`, or `"acceptable"`. `acceptable` is reserved
+  for genuine spec ambiguity where two well-defined implementation choices both
+  conform to a published spec (e.g. RFC 7748 small-order X25519 PKs: rbx-crypto
+  returns the all-zero shared per the original Curve25519 contract, libsodium-
+  strict rejects). A consumer of an `acceptable` test should pass if its impl
+  matches the recorded `shared` (or equivalent output field) OR if it cleanly
+  rejects. The `comment` and `flags` document the two camps.
 
 ## Targets vocabulary
 
