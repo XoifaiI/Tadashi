@@ -19,7 +19,7 @@
     "HexNibbleOrder": { "bugType": "ENCODING", "description": "Each byte has distinct high and low nibbles." },
     "Pseudorandom": { "bugType": "BASIC", "description": "Standard correctness check on output value." }
   },
-  "numberOfTests": 15,
+  "numberOfTests": 16,
   "testGroups": [
     {
       "type": "Sha256Digest",
@@ -168,6 +168,16 @@
         },
         {
           "tcId": 15,
+          "comment": "NIST CAVS Monte Carlo (MCT) chained iteration: msg is H^999(seed) where seed = 0x00..1f; SHA-256(msg) is the 1000th iteration's digest. Catches buffer-reuse / state-corruption / drift invisible to short KATs (Filippo's accumulated-vector pattern, words.filippo.io/accumulated).",
+          "targets": ["MonteCarlo", "AccumulatedHash"],
+          "flags": ["MonteCarlo"],
+          "source": { "name": "tadashi", "version": "0.1.0", "crossChecked": ["node:crypto"] },
+          "msg": "b7b81dbeec01f0eee02e43da4988dafb5ecc56a90080555aff89bcbc92ba59c8",
+          "digest": "45cd0d40a72c806c4b78bbeca7a52d9fa6f25751fea57cf1564e7b70b9519db4",
+          "result": "valid"
+        },
+        {
+          "tcId": 16,
           "comment": "Asymmetric message bytes; nibbles within each byte differ. Catches hex parser nibble-swap or byte-reverse bugs.",
           "targets": ["HexByteOrder", "HexNibbleOrder"],
           "flags": ["Pseudorandom"],

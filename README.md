@@ -42,9 +42,9 @@ the standard `tcId / comment / flags / result` plus a Tadashi-specific
 | Poly1305 | done (15 tests) |
 | ChaCha20-Poly1305 | done (15 tests) |
 | XChaCha20-Poly1305 | done (17 tests) |
-| AES-GCM | done (33 tests) |
+| AES-GCM | done (35 tests) |
 | SHA-224 | done (15 tests) |
-| SHA-256 | done (15 tests) |
+| SHA-256 | done (16 tests) |
 | SHA-384 | done (15 tests) |
 | SHA-512 | done (15 tests) |
 | SHA3-224 | done (11 tests) |
@@ -69,6 +69,9 @@ the standard `tcId / comment / flags / result` plus a Tadashi-specific
 | ML-DSA-44 | done (21 tests) |
 | ML-DSA-65 | done (21 tests) |
 | ML-DSA-87 | done (21 tests) |
+| Argon2id | done (15 tests) |
+| SHA-1 | done (10 tests, deprecated) |
+| MD5 | done (10 tests, deprecated) |
 
 ## License
 

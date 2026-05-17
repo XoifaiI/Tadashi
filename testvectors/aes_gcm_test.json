@@ -19,11 +19,12 @@
     "J0NonStandardIv": { "bugType": "MISSING_STEP", "description": "IV is not 96 bits, so J0 = GHASH(IV with bit-padding and length block) instead of IV || 0x00000001.", "effect": "Bug if implementation always uses the 96-bit fast path." },
     "GhashReduction": { "bugType": "BASIC", "description": "Pseudorandom inputs that exercise GF(2^128) polynomial reduction with the 0xe1 reduction constant." },
     "TagForgery": { "bugType": "AUTH_BYPASS", "description": "Modified tag, ciphertext, AAD, or IV with otherwise valid encryption.", "effect": "Decrypt must reject." },
+    "TagTruncation": { "bugType": "INPUT_VALIDATION", "description": "Tag length less than the 16-byte (128-bit) full-tag; CVE-2025-54887 class. Strict impls reject any tag length != 16.", "effect": "Bug if impl silently accepts shorter tags." },
     "HexByteOrder": { "bugType": "ENCODING", "description": "Bytes are asymmetric; reversed byte order would produce a different result." },
     "HexNibbleOrder": { "bugType": "ENCODING", "description": "Each byte has distinct high and low nibbles." },
     "Pseudorandom": { "bugType": "BASIC", "description": "Standard correctness check on output value." }
   },
-  "numberOfTests": 33,
+  "numberOfTests": 35,
   "testGroups": [
     {
       "type": "AesGcmEncrypt",
@@ -369,6 +370,34 @@
         },
         {
           "tcId": 33,
+          "comment": "Tag truncated to 8 bytes (the first 8 of the real 16-byte tag). rbx-crypto's ConstantTimeCompare requires equal lengths, so this is rejected via length-mismatch. CVE-2025-54887 class: impls that accept short tags trade auth strength for forgery surface (2^64 instead of 2^128).",
+          "targets": ["TagTruncation", "TagForgery"],
+          "flags": ["TagTruncation", "InputValidation"],
+          "source": { "name": "tadashi", "version": "0.1.0", "crossChecked": ["node:crypto"] },
+          "key": "000102030405060708090a0b0c0d0e0f",
+          "iv": "0001020304050607080a0b0c",
+          "aad": "",
+          "msg": "00112233445566778899aabbccddeeff",
+          "ct": "b6e3a8f7b862db3d6f6e07eb476aeb51",
+          "tag": "7a8d236bd11a99c8",
+          "result": "invalid"
+        },
+        {
+          "tcId": 34,
+          "comment": "Tag truncated to 12 bytes (96 bits, the minimum recommended truncation per NIST SP 800-38D). rbx-crypto requires the full 16-byte tag; rejects.",
+          "targets": ["TagTruncation", "TagForgery"],
+          "flags": ["TagTruncation", "InputValidation"],
+          "source": { "name": "tadashi", "version": "0.1.0", "crossChecked": ["node:crypto"] },
+          "key": "000102030405060708090a0b0c0d0e0f",
+          "iv": "0001020304050607080a0b0c",
+          "aad": "",
+          "msg": "00112233445566778899aabbccddeeff",
+          "ct": "b6e3a8f7b862db3d6f6e07eb476aeb51",
+          "tag": "7a8d236bd11a99c832014088",
+          "result": "invalid"
+        },
+        {
+          "tcId": 35,
           "comment": "Asymmetric key, IV, AAD, and plaintext bytes; nibbles within each byte differ. Catches hex parser nibble-swap or byte-reverse bugs anywhere in the runner.",
           "targets": ["HexByteOrder", "HexNibbleOrder"],
           "flags": ["Pseudorandom"],
