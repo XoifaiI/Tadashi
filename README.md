@@ -63,6 +63,12 @@ the standard `tcId / comment / flags / result` plus a Tadashi-specific
 | KMAC256 | done (12 tests) |
 | Ed25519 | done (50 tests) |
 | X25519 | done (27 tests) |
+| ML-KEM-512 | done (21 tests) |
+| ML-KEM-768 | done (21 tests) |
+| ML-KEM-1024 | done (21 tests) |
+| ML-DSA-44 | done (21 tests) |
+| ML-DSA-65 | done (21 tests) |
+| ML-DSA-87 | done (21 tests) |
 
 ## License
 
