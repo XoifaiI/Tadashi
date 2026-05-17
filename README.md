@@ -55,6 +55,12 @@ the standard `tcId / comment / flags / result` plus a Tadashi-specific
 | SHAKE256 | done (13 tests) |
 | BLAKE2b | done (16 tests) |
 | BLAKE3 | done (22 tests) |
+| HMAC-SHA256 | done (12 tests) |
+| HMAC-SHA512 | done (12 tests) |
+| HKDF-SHA256 | done (9 tests) |
+| HKDF-SHA512 | done (9 tests) |
+| KMAC128 | done (12 tests) |
+| KMAC256 | done (12 tests) |
 
 ## License
 
