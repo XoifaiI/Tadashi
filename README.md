@@ -43,6 +43,10 @@ the standard `tcId / comment / flags / result` plus a Tadashi-specific
 | ChaCha20-Poly1305 | done (15 tests) |
 | XChaCha20-Poly1305 | done (17 tests) |
 | AES-GCM | done (33 tests) |
+| SHA-224 | done (15 tests) |
+| SHA-256 | done (15 tests) |
+| SHA-384 | done (15 tests) |
+| SHA-512 | done (15 tests) |
 
 ## License
 
