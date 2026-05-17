@@ -47,6 +47,14 @@ the standard `tcId / comment / flags / result` plus a Tadashi-specific
 | SHA-256 | done (15 tests) |
 | SHA-384 | done (15 tests) |
 | SHA-512 | done (15 tests) |
+| SHA3-224 | done (11 tests) |
+| SHA3-256 | done (11 tests) |
+| SHA3-384 | done (11 tests) |
+| SHA3-512 | done (11 tests) |
+| SHAKE128 | done (13 tests) |
+| SHAKE256 | done (13 tests) |
+| BLAKE2b | done (16 tests) |
+| BLAKE3 | done (22 tests) |
 
 ## License
 
